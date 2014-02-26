@@ -16,24 +16,21 @@ jsonString = "EPO_Reports: [\n"
 for arg in sys.argv:
 	if argCount == 0:
 		argCount += 1
-		pass
-	elif ".csv" not in str(arg):
+	elif not str(arg).lower().endswith(".csv"):
 		sys.stderr.write("Error: File given must be of csv format.\n")
 		sys.exit()
 	else:
 		fileName = str(arg)
 
 #Getting the length of the file for when commas are being added in the list
-fileLen = len(open(fileName, "rb").readlines())
+fileLen = len(open(fileName, "r").readlines())
 
 #Opening file for reading
-epoFile = open(fileName, "rb")
+epoFile = open(fileName, "r")
 
 #Reading the first line of the file to get the column names
 colNames = csv.reader(epoFile, delimiter=',')
-for row in colNames:
-	headings = row
-	break
+headings = colNames.next()
 
 #Getting all of the information from the file into a dictionary using
 #the column names as keys
@@ -41,7 +38,6 @@ information = csv.DictReader(epoFile, headings, delimiter=',')
 for row in information:
 	if rowCount == 0:
 		rowCount += 1
-		pass
 	else:
 		jsonString += json.dumps(row)
 		rowCount += 1
@@ -49,8 +45,7 @@ for row in information:
 			jsonString += "\n"
 		else:
 			jsonString += ",\n"
-
-		
+	
 jsonString += "]"
 
 print jsonString
