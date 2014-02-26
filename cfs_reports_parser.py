@@ -26,6 +26,9 @@ def parseCFS():
 
 	#Getting the length of the file for when commas are being added in the list
 	fileLen = len(open(fileName, "r").readlines())
+	if fileLen == 0:
+		sys.stderr.write("Error: File has no content")
+		sys.exit()
 
 	#Opening the file provided
 	cfsFile = open(fileName, "r")
