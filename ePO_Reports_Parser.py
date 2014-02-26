@@ -50,11 +50,7 @@ for row in information:
 		else:
 			jsonString += ",\n"
 
-		testStr = testStr + json.dumps(row) + ",\n"
-		#testStr = testStr + "\t" + str(json.dumps(row)) + "\n"
-#		json.dump(row, jsonFile)
-#		jsonFile.write(',\n')
-#jsonFile.write("\n]")
-testStr =  testStr + "]"
+		
+jsonString += "]"
 
-print testStr
+print jsonString
