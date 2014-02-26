@@ -23,7 +23,7 @@ for arg in sys.argv:
 	else:
 		fileName = str(arg)
 
-#Getting the length of the file for when commas are being added in list
+#Getting the length of the file for when commas are being added in the list
 fileLen = len(open(fileName, "rb").readlines())
 
 #Opening the file provided
@@ -35,7 +35,7 @@ for row in colNames:
 	headings = row
 	break
 
-#Getting all of the information from the file as a dictionary using
+#Getting all of the information from the file into a dictionary using
 #the column names as keys
 information = csv.DictReader(cfsFile, headings, delimiter='\t')
 for row in information:
