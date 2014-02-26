@@ -6,6 +6,7 @@ import sys
 import csv
 import json
 import os
+import collections
 
 #Initializing base variables
 rowCount = 0
@@ -36,16 +37,14 @@ headings = colNames.next()
 #the column names as keys
 information = csv.DictReader(epoFile, headings, delimiter=',')
 for row in information:
-	if rowCount == 0:
-		rowCount += 1
+	row = collections.OrderedDict(sorted(row.items()))
+	jsonString += json.dumps(row)
+	rowCount += 1
+	if rowCount == (fileLen - 1):
+		jsonString += "\n"
 	else:
-		jsonString += json.dumps(row)
-		rowCount += 1
-		if rowCount == (fileLen - 1):
-			jsonString += "\n"
-		else:
-			jsonString += ",\n"
-	
+		jsonString += ",\n"
+
 jsonString += "]"
 
 print jsonString
