@@ -41,9 +41,8 @@ information = csv.DictReader(cfsFile, headings, delimiter='\t')
 for row in information:
 	if rowCount == 0:
 		rowCount += 1
-		pass
 	else:
-		jsonString += json.dumps(row) 
+		jsonString += json.dumps(row)
 		rowCount += 1
 		if rowCount == (fileLen - 1):
 			jsonString += "\n"
