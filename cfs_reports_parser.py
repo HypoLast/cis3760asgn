@@ -47,4 +47,5 @@ for row in information:
 
 jsonString += "]"
 
+
 print jsonString
