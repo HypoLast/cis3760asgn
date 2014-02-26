@@ -33,5 +33,4 @@ def parseThatShit(fileNameToParse):
 
 	jsonString += "]"
 
-	print jsonString
 	return jsonString
