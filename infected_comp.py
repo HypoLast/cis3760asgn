@@ -5,7 +5,7 @@ import collections
 import json
 import csv
 
-def parseThatShit(fileNameToParse):
+def parseFile(fileNameToParse):
 
 	# Used to skip the first row in the file when parsing
 	# for the information
