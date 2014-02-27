@@ -25,5 +25,5 @@ for row_index in xrange(1, HDI_sheet.nrows):
 	row_dict = dict(zip(head_values, values))
 	rows.append(row_dict)
 
-json_string = '{\n"CFS_Reports": ' + json.dumps(rows, indent = 0) + '\n}'
+json_string = json.dumps(rows, indent = 2)
 print json_string
