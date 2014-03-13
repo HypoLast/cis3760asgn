@@ -6,13 +6,17 @@ import sys
 import csv
 import json
 import os
+import time
 import collections
 
 def parseEPO():
 	#Initializing base variables
 	rowCount = 0
 	argCount = 0
-	jsonString = "EPO_Reports: [\n"
+	jsonString = ("'tablename': 'ePO_Reports', \n" 
+				"'timestamp':'")
+	jsonString += str(time.strftime('%Y:%m:%d %H:%M:%S', time.localtime(time.time()))) 
+	jsonString += "',\n'data' : [\n"
 
 	#Checking arguement(s)
 	for arg in sys.argv:
