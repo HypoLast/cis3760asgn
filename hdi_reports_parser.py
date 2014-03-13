@@ -9,14 +9,14 @@ import time
 import datetime
 
 def main():
-	parseHDI
-
-def parseHDI():
 	if len(sys.argv) < 2:
 		sys.exit('No input file')
-
+	
 	filename = sys.argv[1]
 
+	parseHDI(filename)
+
+def parseHDI(filename):
 	HDI_book = xlrd.open_workbook(filename = filename)
 	result_dict = { 'tablename' : 'HDI_Reports',
 					'timestamp' : time.strftime('%Y:%m:%d %H:%M:%S',
