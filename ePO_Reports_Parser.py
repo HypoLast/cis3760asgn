@@ -13,7 +13,8 @@ def parseEPO():
 	#Initializing base variables
 	rowCount = 0
 	argCount = 0
-	jsonString = ("'tablename': 'ePO_Reports', \n" 
+	jsonString = ("{'apikey' : 'b980d57f35d0dcc8508fcfb02ae27db3ffc6e5ed',\n"
+				"'datavault': 'ePO_Reports', \n" 
 				"'timestamp':'")
 	jsonString += str(time.strftime('%Y:%m:%d %H:%M:%S', time.localtime(time.time()))) 
 	jsonString += "',\n'data' : [\n"
@@ -53,7 +54,7 @@ def parseEPO():
 		else:
 			jsonString += ",\n"
 
-	jsonString += "]"
+	jsonString += "]}"
 
 	#print jsonString
 	return jsonString
