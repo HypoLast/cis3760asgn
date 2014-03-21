@@ -10,21 +10,24 @@ import datetime
 
 def main():
 	if len(sys.argv) < 2:
-		sys.exit('No input file')
+		sys.exit('No input files')
 	
 	filenames = sys.argv[1::]
 
 	for name in filenames:
 		try:
-			parseHDI(name)
+			print parseHDI(name)
 		except Exception as ex:
 			sys.stderr.write('Could not read ' + filename + ': ' + str(ex) + '\n')
 
 def parseHDI(filename):
-		HDI_book = xlrd.open_workbook(filename = filename)
+	HDI_book = xlrd.open_workbook(filename = filename)
+	json_strings = list()
 
-		for sheet_name in HDI_book.sheet_names():
-			parseSheet(HDI_book, sheet_name)
+	for sheet_name in HDI_book.sheet_names():
+			json_strings.append(parseSheet(HDI_book, sheet_name))
+
+	return json_strings
 
 def parseSheet(HDI_book, sheet_name):
 	HDI_sheet = HDI_book.sheet_by_name(sheet_name)
@@ -51,7 +54,7 @@ def parseSheet(HDI_book, sheet_name):
 	
 	result_dict['data'] = rows
 	json_string = json.dumps(result_dict, indent = 2)
-	print json_string
+	return json_string
 
 if __name__ == '__main__':
 	main()
