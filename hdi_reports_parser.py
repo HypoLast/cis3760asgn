@@ -13,7 +13,7 @@ def main():
 		sys.exit('No input files')
 	
 	filenames = sys.argv[1::]
-
+	
 	for name in filenames:
 		try:
 			print '\n'.join(parseHDI(name)) # Print the list as strings separated by '\n'
@@ -23,10 +23,10 @@ def main():
 def parseHDI(filename):
 	HDI_book = xlrd.open_workbook(filename = filename)
 	json_strings = list()
-
+	
 	for sheet_name in HDI_book.sheet_names():
-			json_strings.append(parseSheet(HDI_book, sheet_name))
-
+		json_strings.append(parseSheet(HDI_book, sheet_name))
+	
 	return json_strings
 
 def parseSheet(HDI_book, sheet_name):
@@ -36,7 +36,7 @@ def parseSheet(HDI_book, sheet_name):
 		'timestamp' : time.strftime('%Y:%m:%d %H:%M:%S', time.localtime(time.time()))
 		}
 	rows = list()
-
+	
 	head_row = HDI_sheet.row(0)
 	head_values = [cell.value for cell in head_row]
 	
@@ -44,11 +44,11 @@ def parseSheet(HDI_book, sheet_name):
 		row = HDI_sheet.row(row_index)
 		# Need to do all this crap to output dates properly
 		values = [cell.value
-			  if cell.ctype is not xlrd.XL_CELL_DATE
-			  else datetime.datetime(*xlrd.xldate_as_tuple(cell.value,
-			                                               HDI_book.datemode)).
+		          if cell.ctype is not xlrd.XL_CELL_DATE
+		          else datetime.datetime(*xlrd.xldate_as_tuple(cell.value,
+		                                                       HDI_book.datemode)).
 		                 strftime('%Y:%m:%d')
-			  for cell in row]
+		          for cell in row]
 		row_dict = dict(zip(head_values, values))
 		rows.append(row_dict)
 	
