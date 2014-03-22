@@ -33,8 +33,7 @@ def parseSheet(HDI_book, sheet_name):
 	HDI_sheet = HDI_book.sheet_by_name(sheet_name)
 	
 	result_dict = { 'tablename' : 'HDI_Reports',
-		'timestamp' : time.strftime('%Y:%m:%d %H:%M:%S',
-									time.localtime(time.time()))
+		'timestamp' : time.strftime('%Y:%m:%d %H:%M:%S', time.localtime(time.time()))
 		}
 	rows = list()
 
@@ -45,10 +44,11 @@ def parseSheet(HDI_book, sheet_name):
 		row = HDI_sheet.row(row_index)
 		# Need to do all this crap to output dates properly
 		values = [cell.value
-				  if cell.ctype is not xlrd.XL_CELL_DATE
-				  else datetime.datetime(*xlrd.xldate_as_tuple(
-															   cell.value, HDI_book.datemode)).strftime('%Y:%m:%d')
-				  for cell in row]
+			  if cell.ctype is not xlrd.XL_CELL_DATE
+			  else datetime.datetime(*xlrd.xldate_as_tuple(cell.value,
+			                                               HDI_book.datemode)).
+		                 strftime('%Y:%m:%d')
+			  for cell in row]
 		row_dict = dict(zip(head_values, values))
 		rows.append(row_dict)
 	
