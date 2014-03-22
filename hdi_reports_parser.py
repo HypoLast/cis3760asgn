@@ -16,7 +16,7 @@ def main():
 
 	for name in filenames:
 		try:
-			print parseHDI(name)
+			print '\n'.join(parseHDI(name)) # Print the list as strings separated by '\n'
 		except Exception as ex:
 			sys.stderr.write('Could not read ' + name + ': ' + str(ex) + '\n')
 
