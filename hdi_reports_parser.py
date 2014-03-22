@@ -18,7 +18,7 @@ def main():
 		try:
 			print parseHDI(name)
 		except Exception as ex:
-			sys.stderr.write('Could not read ' + filename + ': ' + str(ex) + '\n')
+			sys.stderr.write('Could not read ' + name + ': ' + str(ex) + '\n')
 
 def parseHDI(filename):
 	HDI_book = xlrd.open_workbook(filename = filename)
