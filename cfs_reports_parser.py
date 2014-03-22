@@ -46,7 +46,7 @@ def parseCFS():
 	information = csv.DictReader(cfsFile, headings, delimiter='\t')
 	for row in information:
 		row = collections.OrderedDict(sorted(row.items()))
-		jsonString += json.dumps(row) 
+		jsonString += json.dumps(row)
 		rowCount += 1
 		if rowCount == (fileLen - 1):
 			jsonString += "\n"
