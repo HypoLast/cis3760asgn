@@ -16,26 +16,15 @@ def main():
 	
 	for name in filenames:
 		try:
-			print '\n'.join(parseHDI(name)) # Print the list as strings separated by '\n'
+			print parseHDI(name)
 		except Exception as ex:
 			sys.stderr.write('Could not read ' + name + ': ' + str(ex) + '\n')
 
 def parseHDI(filename):
 	HDI_book = xlrd.open_workbook(filename = filename)
-	json_strings = list()
+	HDI_sheet = HDI_book.sheet_by_index(0)
 	
-	for sheet_name in HDI_book.sheet_names():
-		json_strings.append(parseSheet(HDI_book, sheet_name))
-	
-	return json_strings
-
-def parseSheet(HDI_book, sheet_name):
-	HDI_sheet = HDI_book.sheet_by_name(sheet_name)
-	
-	result_dict = { 'tablename' : 'HDI_Reports',
-		'timestamp' : time.strftime('%Y:%m:%d %H:%M:%S', time.localtime(time.time()))
-		}
-	rows = list()
+	data = list()
 	
 	head_row = HDI_sheet.row(0)
 	head_values = [cell.value for cell in head_row]
@@ -50,10 +39,9 @@ def parseSheet(HDI_book, sheet_name):
 		                 strftime('%Y:%m:%d')
 		          for cell in row]
 		row_dict = dict(zip(head_values, values))
-		rows.append(row_dict)
+		data.append(row_dict)
 	
-	result_dict['data'] = rows
-	json_string = json.dumps(result_dict, indent = 2)
+	json_string = json.dumps(data, indent = 2)
 	return json_string
 
 if __name__ == '__main__':
